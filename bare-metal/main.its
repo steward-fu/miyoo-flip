@@ -1,0 +1,116 @@
+/dts-v1/;
+
+/ {
+	description = "FIT Image for Miyoo Flip";
+	#address-cells = <1>;
+	images {
+		loader {
+			description = "Bare Metal";
+			data = /incbin/("main.bin");
+			type = "standalone";
+			arch = "arm64";
+			os = "None";
+			compression = "none";
+			load = <0x00a00000>;
+			hash {
+				algo = "sha256";
+			};
+		};
+		atf-1 {
+			description = "ARM Trusted Firmware";
+			data = /incbin/("./bl31_0x00040000.bin");
+			type = "firmware";
+			arch = "arm64";
+			os = "arm-trusted-firmware";
+			compression = "none";
+			load = <0x00040000>;
+			hash {
+				algo = "sha256";
+			};
+		};
+		atf-2 {
+			description = "ARM Trusted Firmware";
+			data = /incbin/("./bl31_0xfdcc1000.bin");
+			type = "firmware";
+			arch = "arm64";
+			os = "arm-trusted-firmware";
+			compression = "none";
+			load = <0xfdcc1000>;
+			hash {
+				algo = "sha256";
+			};
+		};
+		atf-3 {
+			description = "ARM Trusted Firmware";
+			data = /incbin/("./bl31_0x0006b000.bin");
+			type = "firmware";
+			arch = "arm64";
+			os = "arm-trusted-firmware";
+			compression = "none";
+			load = <0x0006b000>;
+			hash {
+				algo = "sha256";
+			};
+		};
+		atf-4 {
+			description = "ARM Trusted Firmware";
+			data = /incbin/("./bl31_0xfdcd0000.bin");
+			type = "firmware";
+			arch = "arm64";
+			os = "arm-trusted-firmware";
+			compression = "none";
+			load = <0xfdcd0000>;
+			hash {
+				algo = "sha256";
+			};
+		};
+		atf-5 {
+			description = "ARM Trusted Firmware";
+			data = /incbin/("./bl31_0xfdcce000.bin");
+			type = "firmware";
+			arch = "arm64";
+			os = "arm-trusted-firmware";
+			compression = "none";
+			load = <0xfdcce000>;
+			hash {
+				algo = "sha256";
+			};
+		};
+		atf-6 {
+			description = "ARM Trusted Firmware";
+			data = /incbin/("./bl31_0x00069000.bin");
+			type = "firmware";
+			arch = "arm64";
+			os = "arm-trusted-firmware";
+			compression = "none";
+			load = <0x00069000>;
+			hash {
+				algo = "sha256";
+			};
+		};
+		optee {
+			description = "OP-TEE";
+			data = /incbin/("tee.bin");
+			type = "firmware";
+			arch = "arm64";
+			os = "op-tee";
+			compression = "none";
+			
+			load = <0x8400000>;
+			hash {
+				algo = "sha256";
+			};
+		};
+	};
+
+	configurations {
+		default = "conf";
+		conf {
+			description = "Miyoo Flip";
+			rollback-index = <0x0>;
+			firmware = "atf-1";
+			loadables = "loader", "atf-2", "atf-3", "atf-4", "atf-5", "atf-6", "optee";
+		};
+	};
+};
+
