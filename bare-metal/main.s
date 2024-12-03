@@ -4,7 +4,7 @@
     .equ GPIO3_BASE, 0xFE760000
     .equ GPIO4_BASE, 0xFE770000
 
-    .globl	_start
+    .global	_start
 _start:
     b reset
 
