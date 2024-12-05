@@ -2,6 +2,8 @@ all:
 	aarch64-linux-gnu-as -mcpu=cortex-a53 -o main.o main.s
 	aarch64-linux-gnu-ld -T main.ld -o main.elf main.o
 	aarch64-linux-gnu-objcopy -O binary main.elf main.bin
+
+bare:
 	./mkimage -f main.its -E main.itb
 	cat main.itb > main.img
 	truncate -s %2048K main.img
