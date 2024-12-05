@@ -14,12 +14,16 @@ reset:
     str w1, [x0, #8]
     str w1, [x0, #12]
 
-    ldr w1, =(1 << 12)
     ldr w2, =0xffff0000
+    str w2, [x0, #0]
+
+    ldr w2, =0xffff0002
+    str w2, [x0, #4]
+
+    ldr w1, =(1 << 12)
 0:
     eor w2, w2, w1
     str w2, [x0, #0]
-    str w2, [x0, #4]
     ldr x5, =0x3ffffff
 1:
     subs x5, x5, #1
